@@ -2,7 +2,7 @@ from ui_manager import CourseApp
 import os
 import subprocess
 
-# Ajouter le chemin d'Ollama à PATH si nécessaire
+# Ajouter le chemin d'Ollama à PATH
 ollama_path = r"C:\Users\Ohlone\AppData\Local\Programs\Ollama"
 if ollama_path not in os.environ["PATH"]:
     os.environ["PATH"] += f";{ollama_path}"
