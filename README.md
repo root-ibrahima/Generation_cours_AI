@@ -25,18 +25,15 @@ Ce projet est une application graphique construite en Python, qui génère des c
 ### Étapes
 
 1. Clonez ce dépôt :
-        ```bash
-        git clone https://github.com/votre-utilisateur/votre-repo.git
-        cd votre-repo
-        ```
-2. Installez les dépendances si nécessaire :
-        ```bash
-        pip install -r requirements.txt
-        ```
-3. Ajoutez Ollama à votre PATH si ce n'est pas déjà fait :
-        ```bash
-        export PATH=$PATH:/chemin/vers/ollama
-        ```
+   ```bash
+        git clone https://github.com/ibrahima-eemi/Generation_cours_AI.git
+        cd Generation_cours_AI
+   ```
+
+2. Ajoutez Ollama à votre PATH dans le fichier main.py :
+   ```bash
+    ollama_path = r"C:\Users\[User]\AppData\Local\Programs\Ollama"
+   ```
 
 ## Utilisation
 
@@ -87,7 +84,3 @@ python main.py
 ## Contribuer
 
 Les contributions sont les bienvenues ! Forkez ce dépôt et ouvrez une Pull Request avec vos améliorations ou suggestions.
-
-## Licence
-
-Ce projet est sous licence MIT. Veuillez consulter le fichier LICENSE pour plus de détails.
