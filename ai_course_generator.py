@@ -1,4 +1,4 @@
-# Fichier : ai_course_generator.py
+
 import subprocess
 
 class AICourseGenerator:
@@ -55,29 +55,40 @@ class AICourseGenerator:
         for line in lines:
             line = line.strip()
             if line.startswith("**Introduction**") or line.startswith("**Section"):
-                current_section = {"title": line, "children": []}
+                current_section = {"title": line, "children": [], "line_index": lines.index(line)}
                 structure.append(current_section)
             elif line.startswith("###"):
-                current_subsection = {"title": line, "children": []}
+                current_subsection = {"title": line, "children": [], "line_index": lines.index(line)}
                 if current_section:
                     current_section["children"].append(current_subsection)
             elif line.startswith("*") and current_subsection:
-                current_subsection["children"].append(line)
+                current_subsection["children"].append({"title": line, "line_index": lines.index(line)})
 
         return structure
 
-    def display_course_tree(self, tree_widget, course_structure):
+    def display_course_tree(self, tree_widget, course_structure, on_select_callback=None):
         """
         Affiche l'arborescence du cours dans un widget Treeview.
+        Ajoute un callback sur la sélection si fourni.
         """
         # Nettoyage de l'arborescence existante
         for item in tree_widget.get_children():
             tree_widget.delete(item)
 
+        # Dictionnaire pour mapper les IDs Treeview à des indices de ligne
+        self.tree_item_map = {}
+
         # Remplir l'arborescence avec la nouvelle structure
         for section in course_structure:
             section_id = tree_widget.insert("", "end", text=section["title"])
+            self.tree_item_map[section_id] = section["line_index"]
             for subsection in section["children"]:
                 subsection_id = tree_widget.insert(section_id, "end", text=subsection["title"])
+                self.tree_item_map[subsection_id] = subsection["line_index"]
                 for item in subsection["children"]:
-                    tree_widget.insert(subsection_id, "end", text=item)
+                    item_id = tree_widget.insert(subsection_id, "end", text=item["title"])
+                    self.tree_item_map[item_id] = item["line_index"]
+
+        # Associer l'événement de sélection uniquement si un callback est fourni
+        if on_select_callback:
+            tree_widget.bind("<<TreeviewSelect>>", lambda event: on_select_callback(event, self.tree_item_map))

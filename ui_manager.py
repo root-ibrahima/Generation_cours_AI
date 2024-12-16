@@ -3,7 +3,6 @@ from tkinter import ttk, messagebox
 import threading
 from ai_course_generator import AICourseGenerator
 
-
 class CourseApp:
     """
     Interface utilisateur pour générer des cours avec Ollama.
@@ -79,18 +78,26 @@ class CourseApp:
 
             # Extrait et affiche l'arborescence
             course_structure = self.generator.extract_course_structure(course)
-            self.generator.display_course_tree(self.course_tree, course_structure)
+            self.generator.display_course_tree(self.course_tree, course_structure, self.scroll_to_section)
         except Exception as e:
             print(f"Erreur lors de la génération : {str(e)}")
             self.course_text.delete("1.0", tk.END)
             self.course_text.insert(tk.END, f"Erreur : {str(e)}")
+
+    def scroll_to_section(self, event, tree_item_map):
+        """
+        Fait défiler la zone de texte jusqu'à la section correspondante lorsqu'un élément de l'arborescence est sélectionné.
+        """
+        selected_item = self.course_tree.focus()
+        if selected_item in tree_item_map:
+            line_index = tree_item_map[selected_item]
+            self.course_text.see(f"{line_index + 1}.0")
 
     def run(self):
         """
         Lance l'application Tkinter.
         """
         self.root.mainloop()
-
 
 if __name__ == "__main__":
     app = CourseApp()
