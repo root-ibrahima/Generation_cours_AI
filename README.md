@@ -2,6 +2,9 @@
 
 Ce projet est une application graphique construite en Python, qui génère des cours détaillés et structurés à l'aide du modèle Ollama. Il permet de créer des cours sur n'importe quel sujet en offrant une interface utilisateur intuitive avec des fonctionnalités comme l'affichage d'arborescence, la régénération de contenu, et la navigation dans le contenu généré.
 
+![image](https://github.com/user-attachments/assets/dbd57244-bd10-4329-9249-35c99381a32b)
+
+
 ## Fonctionnalités
 
 - **Génération automatique de cours** : Saisissez un sujet et laissez l'application générer un cours structuré avec une introduction, des sections principales, et des sous-sections.
