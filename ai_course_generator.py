@@ -1,4 +1,3 @@
-
 import subprocess
 
 class AICourseGenerator:
@@ -19,7 +18,6 @@ class AICourseGenerator:
             "et des sous-sections (A, B, C)."
         )
         try:
-            print(f"Lancement de la commande : ollama run {self.model}")
             process = subprocess.run(
                 ["ollama", "run", self.model],
                 input=prompt.encode("utf-8"),
@@ -29,18 +27,12 @@ class AICourseGenerator:
             )
             if process.returncode != 0:
                 error_message = process.stderr.decode("utf-8")
-                print(f"Erreur rencontrée : {error_message}")
                 return f"Erreur : {error_message}"
 
-            response = process.stdout.decode("utf-8").strip()
-            print(f"Réponse reçue : {response}")
-            return response
-
+            return process.stdout.decode("utf-8").strip()
         except subprocess.TimeoutExpired:
-            print("Erreur : Temps limite dépassé.")
-            return "Erreur : Temps limite dépassé pour l'exécution d'Ollama."
+            return "Erreur : Temps limite dépassé."
         except Exception as e:
-            print(f"Erreur inattendue : {str(e)}")
             return f"Erreur inattendue : {str(e)}"
 
     def extract_course_structure(self, course_text):
@@ -52,24 +44,24 @@ class AICourseGenerator:
         current_section = None
         current_subsection = None
 
-        for line in lines:
+        for index, line in enumerate(lines):
             line = line.strip()
             if line.startswith("**Introduction**") or line.startswith("**Section"):
-                current_section = {"title": line, "children": [], "line_index": lines.index(line)}
+                current_section = {"title": line, "line_index": index, "children": []}
                 structure.append(current_section)
+                current_subsection = None
             elif line.startswith("###"):
-                current_subsection = {"title": line, "children": [], "line_index": lines.index(line)}
+                current_subsection = {"title": line, "line_index": index, "children": []}
                 if current_section:
                     current_section["children"].append(current_subsection)
             elif line.startswith("*") and current_subsection:
-                current_subsection["children"].append({"title": line, "line_index": lines.index(line)})
+                current_subsection["children"].append({"title": line, "line_index": index})
 
         return structure
 
     def display_course_tree(self, tree_widget, course_structure, on_select_callback=None):
         """
         Affiche l'arborescence du cours dans un widget Treeview.
-        Ajoute un callback sur la sélection si fourni.
         """
         # Nettoyage de l'arborescence existante
         for item in tree_widget.get_children():
