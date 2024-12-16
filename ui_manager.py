@@ -140,8 +140,7 @@ class CourseApp:
             messagebox.showwarning("Aucune sélection", "Veuillez sélectionner une partie à régénérer dans l'arborescence.")
             return
 
-        line_index = self.tree_item_map.get(selected_item)
-        if line_index is None:
+        if not isinstance(self.tree_item_map, dict) or selected_item not in self.tree_item_map:
             messagebox.showerror("Erreur", "Impossible de trouver la partie sélectionnée.")
             return
 
@@ -165,8 +164,21 @@ class CourseApp:
         try:
             # Génère le texte pour la partie spécifique
             part_content = self.generator.generate_course(part_title)
-            # Ajoute ou remplace la partie dans la zone de texte
-            self.course_text.insert("end", f"\nRégénéré :\n{part_content}\n")
+            # Remplace uniquement le texte de la partie sélectionnée
+            lines = self.course_text.get("1.0", "end").splitlines()
+            new_lines = []
+            replacing = False
+            for line in lines:
+                if line.strip() == part_title:
+                    replacing = True
+                    new_lines.append(f"{part_title}\n{part_content}")
+                elif replacing and not line.strip():
+                    replacing = False
+                elif not replacing:
+                    new_lines.append(line)
+
+            self.course_text.delete("1.0", tk.END)
+            self.course_text.insert("1.0", "\n".join(new_lines))
 
             self.status_label.config(text=f"Régénération de '{part_title}' terminée", foreground="green")
         except Exception as e:
