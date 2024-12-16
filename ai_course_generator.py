@@ -42,3 +42,42 @@ class AICourseGenerator:
         except Exception as e:
             print(f"Erreur inattendue : {str(e)}")
             return f"Erreur inattendue : {str(e)}"
+
+    def extract_course_structure(self, course_text):
+        """
+        Extrait une arborescence à partir du texte du cours.
+        """
+        structure = []
+        lines = course_text.splitlines()
+        current_section = None
+        current_subsection = None
+
+        for line in lines:
+            line = line.strip()
+            if line.startswith("**Introduction**") or line.startswith("**Section"):
+                current_section = {"title": line, "children": []}
+                structure.append(current_section)
+            elif line.startswith("###"):
+                current_subsection = {"title": line, "children": []}
+                if current_section:
+                    current_section["children"].append(current_subsection)
+            elif line.startswith("*") and current_subsection:
+                current_subsection["children"].append(line)
+
+        return structure
+
+    def display_course_tree(self, tree_widget, course_structure):
+        """
+        Affiche l'arborescence du cours dans un widget Treeview.
+        """
+        # Nettoyage de l'arborescence existante
+        for item in tree_widget.get_children():
+            tree_widget.delete(item)
+
+        # Remplir l'arborescence avec la nouvelle structure
+        for section in course_structure:
+            section_id = tree_widget.insert("", "end", text=section["title"])
+            for subsection in section["children"]:
+                subsection_id = tree_widget.insert(section_id, "end", text=subsection["title"])
+                for item in subsection["children"]:
+                    tree_widget.insert(subsection_id, "end", text=item)
