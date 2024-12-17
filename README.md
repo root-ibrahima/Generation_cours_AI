@@ -25,12 +25,14 @@ Ce projet est une application graphique construite en Python, qui génère des c
 ### Étapes
 
 1. Clonez ce dépôt :
+
    ```bash
         git clone https://github.com/ibrahima-eemi/Generation_cours_AI.git
         cd Generation_cours_AI
    ```
 
-2. Ajoutez Ollama à votre PATH dans le fichier main.py :
+3. Ajoutez Ollama à votre PATH dans le fichier main.py :
+
    ```bash
     ollama_path = r"C:\Users\[User]\AppData\Local\Programs\Ollama"
    ```
@@ -43,31 +45,31 @@ Lancez l'application :
 python main.py
 ```
 
-### Interface utilisateur :
+### Interface utilisateur
 
 1. Entrez un sujet dans la barre de texte dédiée.
 2. Cliquez sur "Régénérer" pour générer un cours sur ce sujet.
 3. Utilisez l'arborescence pour naviguer entre les sections principales.
 4. Cliquez sur "Régénérer la partie" pour modifier uniquement une section sélectionnée.
 
-### Exemple de sujet :
+### Exemple de sujet
 
 - "Introduction à l'intelligence artificielle"
 - "Les bases de la programmation en Python"
 
 ## Détails techniques
 
-### Modules principaux :
+### Modules principaux
 
 - `ai_course_generator.py` : Interface avec Ollama pour générer et traiter le contenu des cours.
 - `ui_manager.py` : Gère l'interface utilisateur avec Tkinter.
 - `main.py` : Point d'entrée du projet, configure Ollama et lance l'application.
 
-### Modèle utilisé :
+### Modèle utilisé
 
 - Ollama Llama3.2
 
-### Gestion des threads :
+### Gestion des threads
 
 - Empêche le blocage de l'interface en déplaçant les tâches intensives dans des threads séparés.
 
