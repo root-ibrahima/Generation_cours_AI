@@ -2,9 +2,6 @@
 
 Ce projet est une application graphique construite en Python, qui génère des cours détaillés et structurés à l'aide du modèle Ollama. Il permet de créer des cours sur n'importe quel sujet en offrant une interface utilisateur intuitive avec des fonctionnalités comme l'affichage d'arborescence, la régénération de contenu, et la navigation dans le contenu généré.
 
-![image](https://github.com/user-attachments/assets/dbd57244-bd10-4329-9249-35c99381a32b)
-
-
 ## Fonctionnalités
 
 - **Génération automatique de cours** : Saisissez un sujet et laissez l'application générer un cours structuré avec une introduction, des sections principales, et des sous-sections.
@@ -19,23 +16,24 @@ Ce projet est une application graphique construite en Python, qui génère des c
 - Python 3.8 ou supérieur
 - Ollama installé localement (ajoutez son chemin à votre PATH si nécessaire)
 - Les bibliothèques Python suivantes :
-    - tkinter (inclus dans la plupart des installations Python)
-    - threading
+- tkinter (inclus dans la plupart des installations Python)
+- threading
 
 ### Étapes
 
 1. Clonez ce dépôt :
-
-   ```bash
-   git clone https://github.com/ibrahima-eemi/Generation_cours_AI.git
-   cd Generation_cours_AI
-   ```
-
-3. Ajoutez Ollama à votre PATH dans le fichier main.py :
-
-   ```bash
-    ollama_path = r"C:\Users\[User]\AppData\Local\Programs\Ollama"
-   ```
+        ```bash
+        git clone https://github.com/votre-utilisateur/votre-repo.git
+        cd votre-repo
+        ```
+2. Installez les dépendances si nécessaire :
+        ```bash
+        pip install -r requirements.txt
+        ```
+3. Ajoutez Ollama à votre PATH si ce n'est pas déjà fait :
+        ```bash
+        export PATH=$PATH:/chemin/vers/ollama
+        ```
 
 ## Utilisation
 
