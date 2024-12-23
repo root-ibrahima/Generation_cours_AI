@@ -26,14 +26,14 @@ Ce projet est une application graphique construite en Python, qui génère des c
 1. Clonez ce dépôt :
 
    ```bash
-        git clone https://github.com/ibrahima-eemi/Generation_cours_AI.git
-        cd Generation_cours_AI
+   git clone https://github.com/ibrahima-eemi/Generation_cours_AI.git
+   cd Generation_cours_AI
    ```
 
 2. Ajoutez Ollama à votre PATH dans le fichier main.py :
 
    ```bash
-    ollama_path = r"C:\Users\[User]\AppData\Local\Programs\Ollama"
+   ollama_path = r"C:\Users\[User]\AppData\Local\Programs\Ollama"
    ```
 
 ## Utilisation
