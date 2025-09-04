@@ -26,7 +26,7 @@ Ce projet est une application graphique construite en Python, qui génère des c
 1. Clonez ce dépôt :
 
    ```bash
-   git clone https://github.com/ibrahima-eemi/Generation_cours_AI.git
+   git clone https://github.com/root-ibrahima/Generation_cours_AI.git
    cd Generation_cours_AI
    ```
 
